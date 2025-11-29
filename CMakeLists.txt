@@ -1,47 +1,53 @@
 cmake_minimum_required(VERSION 3.20)
 
-# Create a project with name 'myapp'
 set(TARGET_NAME myapp)
 project(${TARGET_NAME})
 
-# Depthai dependency
 find_package(depthai REQUIRED)
 message(STATUS "Found depthai: ${depthai_DIR}")
 
-# Dependencies (optional, only used for example)
 find_package(OpenCV REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+find_library(GLU_LIBRARY NAMES GLU GLU32 libGLU)
 
-# Add source files
 add_executable("${TARGET_NAME}"
     src/main.cpp
 )
 
-# Link with libraries
 target_link_libraries(${TARGET_NAME}
     PUBLIC
         depthai::core
-        ${OpenCV_LIBS} # optional, used for example
+        ${OpenCV_LIBS}
 )
 
-# Set some errors
+if(TARGET OpenGL::GL)
+    target_link_libraries(${TARGET_NAME} PUBLIC OpenGL::GL)
+elseif(DEFINED OPENGL_gl_LIBRARY)
+    target_link_libraries(${TARGET_NAME} PUBLIC ${OPENGL_gl_LIBRARY})
+elseif(DEFINED OPENGL_LIBRARIES)
+    target_link_libraries(${TARGET_NAME} PUBLIC ${OPENGL_LIBRARIES})
+endif()
+
+if(DEFINED GLU_LIBRARY)
+    target_link_libraries(${TARGET_NAME} PUBLIC ${GLU_LIBRARY})
+endif()
+
+if(TARGET GLUT::GLUT)
+    target_link_libraries(${TARGET_NAME} PUBLIC GLUT::GLUT)
+elseif(DEFINED GLUT_LIBRARY)
+    target_link_libraries(${TARGET_NAME} PUBLIC ${GLUT_LIBRARY})
+elseif(DEFINED GLUT_LIBRARIES)
+    target_link_libraries(${TARGET_NAME} PUBLIC ${GLUT_LIBRARIES})
+endif()
+    if(DEFINED GLUT_INCLUDE_DIRS)
+        target_include_directories(${TARGET_NAME} PUBLIC ${GLUT_INCLUDE_DIRS})
+    endif()
+
 if(NOT MSVC)
     target_compile_options(${TARGET_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-Werror=return-type>)
 endif()
 
-# Set compiler features (c++17)
 set_property(TARGET ${TARGET_NAME} PROPERTY CXX_STANDARD 17)
 
-# Windows - Add runtime dependencies
-if(WIN32)
-    if(CMAKE_VERSION VERSION_LESS "3.21")
-        message(WARNING "CMake version less than 3.21 - automatic DLL handling not available. Make sure to copy required DLLs to the same folder as .exe")
-    else()
-        # TARGET_RUNTIME_DLLS generator expression available since CMake 3.21
-        set(depthai_dll_libraries "$<TARGET_RUNTIME_DLLS:${TARGET_NAME}>")
-        # Copy the required dlls
-        add_custom_command(TARGET ${TARGET_NAME} POST_BUILD COMMAND
-            ${CMAKE_COMMAND} -E copy_if_different ${depthai_dll_libraries} $<TARGET_FILE_DIR:${TARGET_NAME}>
-            COMMAND_EXPAND_LISTS
-        )
-    endif()
-endif()
+

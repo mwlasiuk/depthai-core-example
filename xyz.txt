@@ -1,0 +1,110 @@
+Device : OAK-D-LITE
+
+Connected Cameras: 3
+  - Socket 0
+  - Socket 1
+  - Socket 2
+
+Camera Features: 3
+
+  Feature 0:
+    Socket: 0
+    Sensor Name: IMX214
+    Width: 4208
+    Height: 3120
+
+  Feature 1:
+    Socket: 1
+    Sensor Name: OV7251
+    Width: 640
+    Height: 480
+
+  Feature 2:
+    Socket: 2
+    Sensor Name: OV7251
+    Width: 640
+    Height: 480
+
+Camera Sensor Names: 3
+  Socket 1: OV7251
+  Socket 0: IMX214
+  Socket 2: OV7251
+
+Calibration Information:
+
+  Camera at Socket 0:
+    Intrinsics (3x3):
+      fx=2997.13, fy=2997.96
+      cx=1884.3, cy=1064.43
+    FOV: 68.7938 degrees
+
+  Camera at Socket 1:
+    Intrinsics (3x3):
+      fx=453.207, fy=453.165
+      cx=321.065, cy=241.516
+    FOV: 72.9 degrees
+
+  Camera at Socket 2:
+    Intrinsics (3x3):
+      fx=460.632, fy=460.411
+      cx=314.897, cy=242.613
+    FOV: 72.9 degrees
+
+  Baseline Distance: 7.5 cm
+
+
+Device : OAK-D-SR-POE
+
+Connected Cameras: 3
+  - Socket 0
+  - Socket 1
+  - Socket 2
+
+Camera Features: 3
+
+  Feature 0:
+    Socket: 0
+    Sensor Name: S5K33D
+    Width: 640
+    Height: 480
+
+  Feature 1:
+    Socket: 1
+    Sensor Name: OV9782
+    Width: 1280
+    Height: 800
+
+  Feature 2:
+    Socket: 2
+    Sensor Name: OV9782
+    Width: 1280
+    Height: 800
+
+Camera Sensor Names: 3
+  Socket 1: OV9782
+  Socket 0: S5K33D
+  Socket 2: OV9782
+
+Calibration Information:
+
+  Camera at Socket 0:
+    Intrinsics (3x3):
+      fx=470.721, fy=470.547
+      cx=316.926, cy=248.579
+    FOV: 71.86 degrees
+
+  Camera at Socket 1:
+    Intrinsics (3x3):
+      fx=804.578, fy=804.302
+      cx=640.81, cy=410.913
+    FOV: 71.86 degrees
+
+  Camera at Socket 2:
+    Intrinsics (3x3):
+      fx=805.143, fy=804.754
+      cx=619.641, cy=387.777
+    FOV: 71.86 degrees
+
+  Baseline Distance: 2 cm
+
+
